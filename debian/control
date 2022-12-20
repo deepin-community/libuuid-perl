@@ -1,0 +1,28 @@
+Source: libuuid-perl
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Uploaders: gregor herrmann <gregoa@debian.org>,
+           Ansgar Burchardt <ansgar@debian.org>,
+           Axel Beckert <abe@debian.org>
+Section: perl
+Testsuite: autopkgtest-pkg-perl
+Priority: optional
+Build-Depends: debhelper (>= 11),
+               libdevel-checklib-perl,
+               perl,
+               uuid-dev
+Standards-Version: 4.3.0
+Vcs-Browser: https://salsa.debian.org/perl-team/modules/packages/libuuid-perl
+Vcs-Git: https://salsa.debian.org/perl-team/modules/packages/libuuid-perl.git
+Homepage: https://metacpan.org/release/UUID
+
+Package: libuuid-perl
+Architecture: any
+Depends: ${misc:Depends},
+         ${perl:Depends},
+         ${shlibs:Depends}
+Description: Perl extension for using UUID interfaces as defined in e2fsprogs
+ libuuid generates and parses 128-bit universally unique ids (UUIDs).
+ See RFC 4122 for more information.
+ .
+ This is a Perl interface to libuuid.  It allows generation, parsing,
+ and unparsing of UUIDs.
