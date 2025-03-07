@@ -1,10 +1,7 @@
 use warnings;
-use Test::More tests => 38;
+use Test::More tests => 40;
 use UUID 'uuid';
 
-
-UUID::debug()
-    if $ENV{TEST_VERBOSE};
 
 UUID::generate( $bin );
 is length $bin, 16;
@@ -23,12 +20,14 @@ $rc = UUID::parse( $str, $bin2 );
 is $rc, 0;
 is $bin, $bin2;
 
-UUID::unparse_lower( $bin, $str );
+UUID::unparse_lower( $bin, $str1 );
 UUID::unparse_upper( $bin, $str2 );
-is length( $str ), 36;
-like $str, qr/^[-a-f0-9]+$/;
-is lc( $str ), lc( $str2 );
-ok $str ne $str2;
+is length( $str1 ), 36;
+is length( $str2 ), 36;
+like $str1, qr/^[-a-f0-9]+$/;
+like $str2, qr/^[-A-F0-9]+$/;
+is lc( $str1 ), lc( $str2 );
+ok $str1 ne $str2;
 
 # content of uuid is unchanged if parse fails
 UUID::generate( $bin );
@@ -63,7 +62,7 @@ UUID::generate( $bin1 );
 $bin2 = 'x';
 is abs(UUID::compare( $bin1, $bin2 )), 1;
 is abs(UUID::compare( $bin2, $bin1 )), 1;
-$bin2 = 'some silly ridulously long string that couldnt possibly be a uuid';
+$bin2 = 'some silly ridiculously long string that couldnt possibly be a uuid';
 is abs(UUID::compare( $bin1, $bin2 )), 1;
 is abs(UUID::compare( $bin2, $bin1 )), 1;
 
@@ -113,4 +112,3 @@ $rc = UUID::uuid();
 is length($rc), 36;
 
 exit 0;
-
