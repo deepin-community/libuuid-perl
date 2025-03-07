@@ -1,5 +1,79 @@
 Revision history for Perl extension UUID.
 
+0.37 Mon Feb 24 04:25:27 EST 2025
+  - Fix build under gcc-15 default ISO C23.
+    - Thanks Petr Pisar. [rt.cpan.org #159112]
+
+0.36 Sat Jun 22 21:24:39 EDT 2024
+  - Fix distro tests run from read-only location.
+    - Thanks Petr Pisar. [rt.cpan.org #153854]
+
+0.35 Wed May 29 14:40:34 EDT 2024
+  - Reworked persist file handling for speed.
+  - Reworked seeding for front-loading prefork processes.
+    - Thanks again to Christopher Rasch-Olsen Raa.
+
+0.34 Mon Apr 29 21:03:51 EDT 2024
+  - Added version 3 and 5 UUIDs.
+  - Added deferred persistence, default 0.001 seconds.
+  - Now forces reseed after fork().
+    - Thanks to Christopher Rasch-Olsen Raa. [rt.cpan.org #152751]
+
+0.33 Sat Mar 16 07:34:19 EDT 2024
+  - Removed most bundled e2fsprogs UUID code.
+  - Added :mac=random/unique to hide real MAC.
+  - Fixed finding mac address on native Win32 builds.
+  - Added version 6 and 7 UUIDs.
+  - Switched to ChaCha20 as RNG salted with Xoshiro256++.
+  - Added uuid1(), uuid4() to return strings directly.
+  - Added generate_v1() and generate_v4() for binaries.
+  - Fixed duplicate Win32 random UUIDs when > 1K/sec.
+  - Fixed Win32 v1 throttling when > 10K/sec.
+  - Fixed duplicate v1 UUIDs everywhere when > 10M/sec.
+  - Exposed persistent state function.
+  - Added :persist to make state path configurable.
+  - Fixed possible symlink attack on persistent file.
+  - Added generate_v0() and uuid0() to generate null UUIDs.
+  - Added benchmarks in tests.
+    > make test TEST_VERBOSE=1 TEST_FILES=t/9benchmark/*.t
+  - Added benchmark comparing version speeds, calling styles,
+    and persistence.
+    > make compare
+  - Now believed to be thread safe.
+
+0.32 Tue Dec 12 23:23:51 EST 2023
+  - Expose uuid_type().
+  - Expose uuid_variant().
+  - Expose uuid_time().
+  - Remove dependence on system libraries.
+  - Update POD.
+
+0.31 Mon Nov  6 23:43:58 EST 2023
+  - Make generated metafiles authoritative and test.
+    - Thanks to twata. [rt.cpan.org #150311]
+  - Re-enable warnings, per Kwalitee.
+  - Rename License to LICENSE, per Kwalitee.
+  - Add 'provides' info to metafiles, per Kwalitee.
+  - Add test deps, per Kwalitee.
+  - Switch to non-system types.
+  - Fix make order.
+  - Fix misguided config.h.
+  - Fix missing prototypes.
+  - Fix missing patch.
+  - Split to two level diff utils.
+
+0.30 Tue Oct 31 17:16:50 EDT 2023
+  - Bump ExtUtils::MakeMaker prereq to 6.64 (first version supporting
+    TEST_REQUIRES).
+  - Better support for older Win32.
+  - Fix trivial build warnings.
+
+0.29 Wed Oct 25 01:15:57 EDT 2023
+  - Bump prereq version for Devel::CheckLib to 1.14 to fix problems with
+    Strawberry versions 5.18 to 5.28. Earlier Strawberry did not ship
+    Devel::CheckLib. Newer versions shipped 1.14 or later.
+    - Thanks to twata. [rt.cpan.org #143841]
+
 0.28 Sat Dec 29 00:59:25 EST 2018
   - Add OSSP variant of libuuid. CentOS7 (and presumably other RedHat
     derivatives) have packages for both OSSP and e2fs. Favor e2fs, if

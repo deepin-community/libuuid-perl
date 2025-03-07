@@ -1,0 +1,2 @@
+# needs file from source tree: ulib/EUMM.h
+t/5persist/symlink.t
